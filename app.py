@@ -24,6 +24,11 @@ def post_message(text):
     res = res.json()  # SlackAPIからの応答をJSON形式に変換
     return
 
+# テスト用
+@app.route('/')
+def home():
+    return 'Hello World'
+
 # SlackAppからのEventを受信する関数
 @app.route("/run", methods=["POST"])
 def slack_chatbot():
