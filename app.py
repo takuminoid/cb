@@ -3,7 +3,7 @@ from flask import Flask, request, Response
 
 
 TOKEN = "xoxb-2668681787747-2681295403073-irXv0keZLSaSIMurDGvDLpdJ"  # 作成したSlackAppのBotUserOAuthToken
-CHANNEL_ID = "D02K80D6L4X"  # 投稿するチャンネルのID
+CHANNEL_ID = "C04LWLFUXST"  # 投稿するチャンネルのID
 
 # Flaskサーバの起動の準備
 app = Flask(__name__)
