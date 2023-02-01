@@ -13,7 +13,7 @@ pip3 -r requirements.txt
 python3 app.py
 ```
 
-#### slackとの連携するときに便利なやつ
+#### localhostでslackとの連携を試すのに便利なやつ
 ```zsh
 brew install ngrok
 ngrok http 5002 # localhost:5002を外部公開できる
