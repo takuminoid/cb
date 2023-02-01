@@ -3,7 +3,7 @@ from flask import Flask, request, Response
 
 
 TOKEN = "xoxb-2668681787747-2681295403073-irXv0keZLSaSIMurDGvDLpdJ"  # 作成したSlackAppのBotUserOAuthToken
-CHANNEL_ID = "D02K80D6L4X"  # 投稿するチャンネルのID
+CHANNEL_ID = "C04LWLFUXST"  # 投稿するチャンネルのID
 
 # Flaskサーバの起動の準備
 app = Flask(__name__)
@@ -23,6 +23,11 @@ def post_message(text):
     res = requests.post(api_url, headers=headers, params=payload)  # SlackAPIにデータを送信
     res = res.json()  # SlackAPIからの応答をJSON形式に変換
     return
+
+# テスト用
+@app.route('/')
+def home():
+    return 'Hello World'
 
 # SlackAppからのEventを受信する関数
 @app.route("/run", methods=["POST"])
