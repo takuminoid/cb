@@ -34,15 +34,19 @@ def home():
 def slack_chatbot():
     payload = request.json  # 受信したデータをJSON形式に変換
 
-    # SlackのEventSubscriptionの設定時の応答を返す
+    # URL検証用
     if "challenge" in payload:  # SlackのEventSubscriptionの設定時に受信するデータには"challenge"パラメータがある
         print("received 'challenge' parameter")
         token = str(payload["challenge"])  # "challenge"パラメータを文字列型に変換
         return Response(token, mimetype="text/plane")  # "challenge"パラメータを返信
-    
+
     # SlackのEventSubscriptionが実行された時に実行
     if "event" in payload:  # SlackのEventSubscriptionが実行された時に受信するデータには"event"がある
         event = payload["event"]
+
+        # botによるポストの場合は何もしない
+        if 'bot_id' in event:
+            return Response("nothing", mimetype="text/plane")  # 返信
         if "blocks" in event:  # ユーザの投稿には"blocks"がある
             if "text" in event:
                 input_text = event["text"]
