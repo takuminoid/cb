@@ -31,19 +31,17 @@ def slack_chatbot():
 
     # SlackのEventSubscriptionの設定時の応答を返す
     if "challenge" in payload:  # SlackのEventSubscriptionの設定時に受信するデータには"challenge"パラメータがある
-        print("received 'challenge' parameter")  # パラメータを受信したことの確認
+        print("received 'challenge' parameter")
         token = str(payload["challenge"])  # "challenge"パラメータを文字列型に変換
         return Response(token, mimetype="text/plane")  # "challenge"パラメータを返信
     
     # SlackのEventSubscriptionが実行された時に実行
     if "event" in payload:  # SlackのEventSubscriptionが実行された時に受信するデータには"event"がある
-        event = payload["event"]  # "event"データを変数に格納
-        # pprint(event)  # "event"データの確認
+        event = payload["event"]
         if "blocks" in event:  # ユーザの投稿には"blocks"がある
-            if "text" in event:  # "text"があるか確認
-                print("received user's post")  # ユーザの投稿を受信したことの確認
-                input_text = event["text"]  # 投稿されたテキストを変数に格納
-                post_message(input_text)  # main関数(上のセルにあるメインの処理をする関数)の呼び出し
+            if "text" in event:
+                input_text = event["text"]
+                post_message(input_text)
     return Response("nothing", mimetype="text/plane")  # 返信
 
 # Flaskサーバの起動

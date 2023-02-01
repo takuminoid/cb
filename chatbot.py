@@ -11,7 +11,7 @@ class chat_bot():
         # 状態遷移図の矢印を表すルール
         self.update_rule = {
             'None' : 'wait_input_obj'
-            ,'wait_input_obj' : 'wait_input_num_reserv ation'
+            ,'wait_input_obj' : 'wait_input_num_reservation'
             ,'wait_input_num_reservation' : 'wait_input_time'
             ,'wait_input_time' : 'wait_input_menu'
             ,'wait_input_menu' : 'tell_reservation_info'
