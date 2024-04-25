@@ -2,32 +2,29 @@ import requests
 from flask import Flask, request, Response
 
 
-TOKEN = "xoxb-2668681787747-2681295403073-irXv0keZLSaSIMurDGvDLpdJ"  # 作成したSlackAppのBotUserOAuthToken
-CHANNEL_ID = "C04LWLFUXST"  # 投稿するチャンネルのID
+TOKEN = "XXXX"  # 作成したSlackAppのBotUserOAuthToken
+CHANNEL_ID = "XXXX"  # 投稿するチャンネルのID
 
 # Flaskサーバの起動の準備
 app = Flask(__name__)
 
+
 def post_message(text):
     api_url = "https://slack.com/api/chat.postMessage"  # SlackAppが投稿に使用するSlackAPIのURL
     # SlackAPIに送信するデータのヘッダー
-    headers = {
-        "Authorization": "Bearer {}".format(TOKEN),
-        "Content-type": "application/x-www-form-urlencoded"
-    }
+    headers = {"Authorization": "Bearer {}".format(TOKEN), "Content-type": "application/x-www-form-urlencoded"}
     # SlackAPIに送信するデータの本体
-    payload = {
-        "channel": CHANNEL_ID,
-        "text": text
-    }
+    payload = {"channel": CHANNEL_ID, "text": text}
     res = requests.post(api_url, headers=headers, params=payload)  # SlackAPIにデータを送信
     res = res.json()  # SlackAPIからの応答をJSON形式に変換
     return
 
+
 # テスト用
-@app.route('/')
+@app.route("/")
 def home():
-    return 'Hello World'
+    return "Hello World"
+
 
 # SlackAppからのEventを受信する関数
 @app.route("/run", methods=["POST"])
@@ -45,7 +42,7 @@ def slack_chatbot():
         event = payload["event"]
 
         # botによるポストの場合は何もしない
-        if 'bot_id' in event:
+        if "bot_id" in event:
             return Response("nothing", mimetype="text/plane")  # 返信
         if "blocks" in event:  # ユーザの投稿には"blocks"がある
             if "text" in event:
@@ -53,6 +50,7 @@ def slack_chatbot():
                 post_message(input_text)
     return Response("nothing", mimetype="text/plane")  # 返信
 
+
 # Flaskサーバの起動
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(port=5002)
