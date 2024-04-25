@@ -4,7 +4,8 @@
 
 ### ターミナルで動くチャットボット
 ```python
-python3 chatbot.py
+cd terminal-app/
+python3 app.py
 ```
 
 ### slackと連携するチャットボット
